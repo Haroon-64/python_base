@@ -1,0 +1,121 @@
+[project]
+name = "base"
+dynamic = ["version"]
+description = "Base Python"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "hatchling>=1.29.0",
+    "mkdocs-material>=9.7.6",
+    "mkdocstrings-python>=2.0.3",
+    "pydantic-settings>=2.13.1",
+    "rich>=14.3.3",
+    "structlog>=25.5.0",
+]
+
+[project.scripts]
+start = "scripts:start"
+dev = "scripts:dev"
+test = "scripts:test"
+check = "scripts:check"
+docs = "scripts:docs"
+clean = "scripts:clean"
+lint = "scripts:lint"
+format = "scripts:format"
+build-docs = "scripts:build_docs"
+
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+addopts = "-v"
+filterwarnings = ["ignore::pytest.PytestAssertRewriteWarning"]
+testpaths = ["tests"]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.3.0",
+    "tox>=4.49.1",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/app", "src/core"]
+include = ["scripts.py"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "C4",
+    "B",
+    "UP",
+    "PL",
+    "RUF",
+    "T20",
+    "ARG",
+    "ANN",
+    "PERF",
+]
+ignore = ["PLR0913"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ANN", "S101"]
+
+[tool.tox]
+legacy_tox_ini = """
+    [tox]
+    envlist = py312, type, lint
+    isolated_build = True
+
+    [testenv]
+    description = Run tests
+    deps =
+        pytest>=9.0
+        pytest-cov>=7.0
+    commands =
+        pytest {posargs:tests}
+
+    [testenv:type]
+    description = Run type checker
+    deps =
+        mypy>=1.19
+    commands =
+        mypy src
+
+    [testenv:lint]
+    description = Run linter
+    skip_install = true
+    deps =
+        ruff>=0.3.0
+    commands =
+        ruff check src
+"""

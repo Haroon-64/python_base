@@ -1,0 +1,12 @@
+fileignoreconfig:
+  - filename: uv.lock
+    ignore_detectors:
+      - filecontent
+  - filename: .env.example
+    ignore_detectors:
+      - filecontent
+  - filename: src/core/logger.py
+    ignore_detectors:
+      - filecontent
+
+version: "1.0"
