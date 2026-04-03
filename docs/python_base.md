@@ -26,3 +26,7 @@
   - install pre-commit: `uv pre-commit install`
 
 - define start/dev scripts in tasks.py
+
+## get started
+
+- run `uv run docs`
