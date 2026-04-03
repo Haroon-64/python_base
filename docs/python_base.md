@@ -19,6 +19,8 @@
 ## config
 
 - setup uv and pre-commit
+  - install talisman: `bash -c "$(curl -fsSL https://raw.githubusercontent.com/thoughtworks/talisman/main/install.sh)"`
+      (for windows download binary from `https://github.com/thoughtworks/talisman/releases`)
   - install uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
   - sync dependencies: `uv sync`
   - install pre-commit: `uv pre-commit install`
