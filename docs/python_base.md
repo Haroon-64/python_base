@@ -13,7 +13,6 @@
 - pre-commit:
   - talisman: secret scanning
   - ruff
-  - pytest
   - mypy
 
 ## config
