@@ -14,6 +14,9 @@
   - talisman: secret scanning
   - ruff
   - mypy
+  - pytest
+
+  some are commented out, add as required
 
 ## config
 

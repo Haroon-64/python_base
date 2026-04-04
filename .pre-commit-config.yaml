@@ -22,10 +22,10 @@ repos:
   #     - id: mypy
   #       additional_dependencies: [pydantic, pydantic-settings, pytest, structlog]
 
-  - repo: https://github.com/thoughtworks/talisman
-    rev: v1.32.0
-    hooks:
-      - id: talisman-commit
+  # - repo: https://github.com/thoughtworks/talisman
+  #   rev: v1.32.0
+  #   hooks:
+  #     - id: talisman-commit
 
   # - repo: local
   #   hooks:
